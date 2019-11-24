@@ -4,18 +4,15 @@ function swap(array, index1, index2) {
 }
 
 function selectionSort(arr) {
-	let sorted = false;
-
-	while (!sorted) {
-		sorted = true;
-		for (let i = 1; i < arr.length; i++) {
-			if (arr[i] < arr[i - 1]) {
-				arr = swap(arr, i, i - 1);
-				sorted = false;
+	for (let i = 0; i < arr.length; i++) {
+		let minIdx = i;
+		for (let j = i + 1; j < arr.length; j++) {
+			if (arr[j] < arr[minIdx]) {
+				minIdx = j;
 			}
 		}
+		swap(arr, i, minIdx);
 	}
-
 	return arr;
 }
 
