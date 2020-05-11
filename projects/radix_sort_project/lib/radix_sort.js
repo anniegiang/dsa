@@ -1,38 +1,55 @@
 function radixSort(arr) {
-	if (!Array.isArray(arr)) {
-		return null;
-	}
+  if (!Array.isArray(arr)) return null;
 
-	let maxDigits = getMaxDigits(arr);
-	for (let k = 0; k < maxDigits; k++) {
-		let buckets = Array.from({ length: 10 }, () => []); // Array of empty arrays
+  let maxNumDigit = maxNumDigits(arr);
 
-		for (let i = 0; i < arr.length; i++) {
-			let digit = getDigitFrom(arr[i], k);
-			buckets[digit].push(arr[i]);
-		}
+  for (let i = 0; i < maxNumDigit; i++) {
+    let buckets = [];
 
-		arr = [].concat(...buckets);
-	}
-	return arr;
+    for (let i = 0; i < 10; i++) {
+      buckets.push([]);
+    }
+
+    arr.forEach(num => {
+      let digit = getDigitAtPlace(num, i);
+      buckets[digit].push(num);
+    });
+
+    arr = [].concat(...buckets);
+  }
+
+  return arr;
 }
 
-function getIntLength(num) {
-	return num === 0 ? 1 : Math.floor(Math.log10(Math.abs(num))) + 1;
+function getDigitAtPlace(num, place) {
+  let res;
+  for (let i = 0; i <= place; i++) {
+    res = num % 10;
+    num = Math.floor(num / 10);
+  }
+
+  return res;
 }
 
-function getMaxDigits(nums) {
-	let maxDigits = 0;
-	for (let i = 0; i < nums.length; i++) {
-		maxDigits = Math.max(maxDigits, getIntLength(nums[i]));
-	}
-	return maxDigits;
+function maxNumDigits(arr) {
+  let max = 0;
+  arr.forEach(el => {
+    let numDigits = countDigits(el);
+    if (numDigits > max) max = numDigits;
+  });
+
+  return max;
 }
 
-function getDigitFrom(num, place) {
-	return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+function countDigits(num) {
+  let count = 0;
+  while (num) {
+    count++;
+    num = Math.floor(num / 10);
+  }
+  return count;
 }
 
 module.exports = {
-	radixSort
+  radixSort
 };
