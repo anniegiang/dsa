@@ -1,5 +1,5 @@
 function breadthFirstSearch(startingNode, targetVal) {
-  let visited = new Set();
+  const visited = new Set();
   const queue = [startingNode];
 
   while (queue.length) {
