@@ -5,16 +5,17 @@ const { TreeNode } = require("./tree_node.js");
 
 function buildTree(preorder, inorder) {
   if (!preorder.length && !inorder.length) return null;
+
   const root = new TreeNode(preorder[0]);
-  const rootIndex = inorder.indexOf(preorder[0]);
+  const rootIdx = inorder.indexOf(root.val);
 
-  const leftInOrder = inorder.slice(0, rootIndex);
-  const rightInOrder = inorder.slice(rootIndex + 1);
+  const leftInorder = inorder.slice(0, rootIdx);
+  const rightInorder = inorder.slice(rootIdx + 1);
 
-  const leftPreOrder = preorder.filter((val) => leftInOrder.includes(val));
-  const rightPreOrder = preorder.filter((val) => rightInOrder.includes(val));
+  const leftPreorder = preorder.filter((val) => leftInorder.includes(val));
+  const rightPreorder = preorder.filter((val) => rightInorder.includes(val));
 
-  root.left = buildTree(leftPreOrder, leftInOrder);
-  root.right = buildTree(rightPreOrder, rightInOrder);
+  root.left = buildTree(leftPreorder, leftInorder);
+  root.right = buildTree(rightPreorder, rightInorder);
   return root;
 }

@@ -1,15 +1,15 @@
 function inOrderArray(root) {
   if (!root) return [];
-  const left = inOrderArray(root.left);
-  const right = inOrderArray(root.right);
-  return left.concat([root.val]).concat(right);
+  return [...inOrderArray(root.left), root.val, ...inOrderArray(root.right)];
 }
 
 function postOrderArray(root) {
   if (!root) return [];
-  const left = postOrderArray(root.left);
-  const right = postOrderArray(root.right);
-  return left.concat(right).concat([root.val]);
+  return [
+    ...postOrderArray(root.left),
+    ...postOrderArray(root.right),
+    root.val,
+  ];
 }
 
 module.exports = {
