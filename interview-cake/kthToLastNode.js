@@ -1,3 +1,5 @@
+// https://www.interviewcake.com/question/javascript/kth-to-last-node-in-singly-linked-list
+
 const { LinkedListNode } = require("./linkedList");
 
 function getLength(head) {
