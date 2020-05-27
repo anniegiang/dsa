@@ -1,6 +1,6 @@
 // https://www.interviewcake.com/question/javascript/inflight-entertainment
 
-// O(n) time, and O(n)O(n) space. Note while optimizing runtime we added a bit of space cost.
+// O(n) time, and O(n) space. Note while optimizing runtime we added a bit of space cost.
 
 function canTwoMoviesFillFlight(movieLengths, flightLength) {
   const oppMovieLengths = new Set();
