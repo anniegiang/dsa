@@ -30,7 +30,7 @@ class Node {
 
 // TODO: Implement a Singly Linked List class here
 class LinkedList {
-  constructor(val) {
+  constructor() {
     this.head = null;
     this.tail = null;
     this.length = 0;
@@ -44,24 +44,23 @@ class LinkedList {
     } else {
       this.tail.next = newNode;
     }
-    this.length++;
     this.tail = newNode;
+    this.length++;
     return this;
   }
 
   // TODO: Implement the removeTail method here
   removeTail() {
     if (!this.head) return undefined;
+    let node = this.head;
+    let prev = node;
 
-    let current = this.head;
-    let newTail = current;
-
-    while (current.next) {
-      newTail = current;
-      current = current.next;
+    while (node.next) {
+      prev = node;
+      node = node.next;
     }
 
-    this.tail = newTail;
+    this.tail = prev;
     this.tail.next = null;
     this.length--;
 
@@ -70,19 +69,18 @@ class LinkedList {
       this.tail = null;
     }
 
-    return current;
+    return node;
   }
 
   // TODO: Implement the addToHead method here
   addToHead(val) {
     const newNode = new Node(val);
     if (!this.head) {
-      this.head = newNode;
       this.tail = newNode;
     } else {
       newNode.next = this.head;
-      this.head = newNode;
     }
+    this.head = newNode;
     this.length++;
     return this;
   }
@@ -99,24 +97,24 @@ class LinkedList {
 
   // TODO: Implement the contains method here
   contains(target) {
-    let current = this.head;
-    while (current) {
-      if (current.value === target) return true;
-      current = current.next;
+    let node = this.head;
+    while (node) {
+      if (node.value === target) return true;
+      node = node.next;
     }
     return false;
   }
 
   // TODO: Implement the get method here
   get(index) {
-    if (index >= this.length || index < 0) return null;
+    if (index < 0 || index >= this.length) return null;
+    let node = this.head;
     let count = 0;
-    let current = this.head;
     while (count < index) {
-      current = current.next;
+      node = node.next;
       count++;
     }
-    return current;
+    return node;
   }
 
   // TODO: Implement the set method here
@@ -131,30 +129,32 @@ class LinkedList {
 
   // TODO: Implement the insert method here
   insert(index, val) {
-    if (index >= this.length || index < 0) return false;
+    if (index < 0 || index >= this.length) return false;
     if (index === 0) return !!this.addToHead(val);
     if (index === this.length) return !!this.addToTail(val);
 
     const newNode = new Node(val);
-    const prevNode = this.get(index - 1);
-    const temp = prevNode.next;
-    prevNode.next = newNode;
-    newNode.next = temp;
+    const prev = this.get(index - 1);
+    const oldNext = prev.next;
+
+    prev.next = newNode;
+    newNode.next = oldNext;
+
     this.length++;
     return true;
   }
 
   // TODO: Implement the remove method here
   remove(index) {
-    if (index >= this.length || index < 0) return undefined;
-    if (index === 0) return !!this.removeHead(index);
-    if (index === this.length) return !!this.removeTail(index);
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.removeHead(index);
+    if (index === this.length) return this.removeTail(val);
 
-    const prevNode = this.get(index - 1);
-    const temp = prevNode.next;
-    prevNode.next = temp.next;
+    const prev = this.get(index - 1);
+    const node = prev.next;
+    prev.next = node.next;
     this.length--;
-    return temp;
+    return node;
   }
 
   // TODO: Implement the size method here
