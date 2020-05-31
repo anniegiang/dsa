@@ -11,11 +11,11 @@ function findRepeat(numbers) {
   while (left < right) {
     let midIdx = Math.floor(left + (right - left) / 2);
 
-    // lower range
+    // lower range (1...n/2)
     let lowerLeftRange = left;
     let lowerRightRange = midIdx;
 
-    // upper range
+    // upper range (n/2 + 1 ... n)
     let upperLeftRange = midIdx + 1;
     let upperRightRange = right;
 
@@ -26,9 +26,11 @@ function findRepeat(numbers) {
     });
 
     if (lowerNumsCount > distinctLowerNums) {
+      // duplicate must be in the lower range
       left = lowerLeftRange;
       right = lowerRightRange;
     } else {
+      // duplicate must be in the upper range
       left = upperLeftRange;
       right = upperRightRange;
     }
