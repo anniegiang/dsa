@@ -1,6 +1,6 @@
 // https://www.interviewcake.com/question/javascript/highest-product-of-3
 
-// const arrayOfInts = [1, 10, -5, 1, -100];
+// time = O(n), space = O(1)
 
 function highestProductOf3(nums) {
   if (nums.length < 3) throw new Error("Array needs at least 3 integers");
@@ -21,7 +21,7 @@ function highestProductOf3(nums) {
     highestProductOf3 = Math.max(
       highestProductOf3,
       current * highestProductOf2,
-      current * lowestProductOf2 
+      current * lowestProductOf2
     );
 
     highestProductOf2 = Math.max(
