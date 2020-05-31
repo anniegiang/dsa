@@ -1,5 +1,7 @@
 // https://www.interviewcake.com/question/javascript/mesh-message
 
+// time = O(N+M), space = O(N)
+
 // A simple, somewhat inefficient queue implementation
 class Queue {
   constructor() {
