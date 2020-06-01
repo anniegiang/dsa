@@ -1,5 +1,7 @@
 // https://www.interviewcake.com/question/javascript/recursive-string-permutations
 
+// time = O(n!), space = O(n!)
+
 function getPermutations(string) {
   // Generate all permutations of the input string
   if (string.length <= 1) return new Set([string]);
