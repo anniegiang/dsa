@@ -1,6 +1,6 @@
 // https://www.interviewcake.com/question/javascript/coin
 
-// O(n∗m) time and O(n)O(n) additional space, where nn is the amount of money and mm is the number of potential denominations.
+// O(n∗m) time and O(n) additional space, where n is the amount of money and m is the number of potential denominations.
 
 function changePossibilities(amount, denominations) {
   // Calculate the number of ways to make change
@@ -8,13 +8,13 @@ function changePossibilities(amount, denominations) {
   table[0] = 1;
 
   denominations.forEach((coin) => {
-    for (let higherAmount = coin; higherAmount <= amount; higherAmount++) {
-      const higherAmountRemainder = higherAmount - coin;
-      table[higherAmount] += table[higherAmountRemainder];
+    for (let newAmt = coin; newAmt <= amount; newAmt++) {
+      const remainder = newAmt - coin;
+      table[newAmt] += table[remainder];
     }
   });
 
-  return table[table.length - 1];
+  return table[amount];
 }
 
 // Tests
