@@ -1,3 +1,7 @@
+// https://www.interviewcake.com/question/javascript/stock-price
+
+// time = O(n), space = O(1)
+
 function getMaxProfit(stockPrices) {
   // Calculate the max profit
   if (stockPrices.length < 2)
